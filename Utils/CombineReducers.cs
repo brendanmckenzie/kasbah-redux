@@ -1,10 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+
 namespace Kasbah.Redux.Utils
 {
     public static class CombineReducers
     {
         public static Func<Action, dynamic, dynamic> Combine(IEnumerable<Func<Action, dynamic, dynamic>> reducers)
         {
-            return new Func<Action, dynamic, dynamic>((input, state) =>
+            Func<Action, dynamic, dynamic> func =  (input, state) =>
             {
                 var ret = state;
 
@@ -14,7 +18,9 @@ namespace Kasbah.Redux.Utils
                 }
 
                 return ret;
-            });
+            };
+
+            return func;
         }
     }
 }
